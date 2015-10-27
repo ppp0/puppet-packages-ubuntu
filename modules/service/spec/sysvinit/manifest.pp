@@ -2,6 +2,10 @@ node default {
 
   service { 'foo': }
 
+  package { 'sysvinit':
+    ensure => present,
+  }
+
   file{ '/tmp/bar':
     ensure  => file,
     content => template('service/spec/sysvinit/script/bar'),
@@ -11,8 +15,9 @@ node default {
   }
   ->
 
-  sysvinit::script{ 'foo':
-    content => template('service/spec/sysvinit/script/foo'),
+  service::define{ 'foo':
+    script  => template('service/spec/sysvinit/script/foo'),
     before  => Service['foo'],
+    require => Package['sysvinit'],
   }
 }
