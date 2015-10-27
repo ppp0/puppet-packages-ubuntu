@@ -4,7 +4,7 @@ node default {
 
   file { '/tmp/bar':
     ensure  => file,
-    content => template('service/spec/systemd/script/bar'),
+    content => template('service/spec/systemd/bar'),
     owner   => '0',
     group   => '0',
     mode    => '0755',
@@ -12,7 +12,7 @@ node default {
   ->
   file { '/etc/init.d/foo':
     ensure  => file,
-    content => template('service/spec/systemd/script/foo.executable'),
+    content => template('service/spec/systemd/foo.executable'),
     owner   => '0',
     group   => '0',
     mode    => '0755',
@@ -20,7 +20,7 @@ node default {
   ->
 
   service::define{ 'foo':
-    script  => template('service/spec/systemd/script/foo.service'),
+    content  => template('service/spec/systemd/foo.service'),
     before  => Service['foo'],
   }
 }
