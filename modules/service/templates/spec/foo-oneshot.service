@@ -1,17 +1,15 @@
 [Unit]
-Documentation=https://github.com/cargomedia/puppet-packages-ubuntu
 SourcePath=/tmp/bar
 Description=Exwecutes bar and outputs foo to file
 Before=runlevel2.target runlevel3.target runlevel4.target runlevel5.target shutdown.target
 After=network.target
 
 [Service]
-Type=one-shot
-Restart=no
+Type=oneshot
 TimeoutSec=5
-IgnoreSIGPIPE=no
 KillMode=process
 RemainAfterExit=no
+ExecStartPre=/bin/rm /tmp/out
 ExecStart=/tmp/bar
 
 [Install]

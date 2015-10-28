@@ -2,6 +2,14 @@ node default {
 
   service { ['foo-oneshot', 'foo-daemon']: }
 
+  file { '/tmp/out':
+    ensure  => file,
+    content => 'Content that should be discarded',
+    owner   => '0',
+    group   => '0',
+    mode    => '0644',
+  }
+
   file { '/tmp/bar':
     ensure  => file,
     content => template('service/spec/bar'),

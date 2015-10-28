@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Systemd service definition' do
 
-  describe file('/etc/systemd/system/foo.service') do
+  describe file('/etc/systemd/system/foo-oneshot.service') do
     it { should be_file }
   end
 
@@ -10,7 +10,7 @@ describe 'Systemd service definition' do
     it { should be_file }
   end
 
-  describe service('foo') do
+  describe service('foo-oneshot') do
     it { should be_enabled }
   end
 
@@ -22,15 +22,13 @@ describe 'Systemd service definition' do
   describe file('/tmp/out') do
     it { should be_file }
     its(:content) { should match /foo/}
+    its(:content) { should_not match /Content that should be discarded/}
+
   end
 
   describe file('/tmp/out-daemon') do
     it { should be_file }
     its(:content) { should match /alive and kicking/}
-  end
-
-  describe file('var/run/bar-daemon.pid') do
-    it { should be_file }
   end
 
 end
