@@ -1,6 +1,8 @@
 node default {
 
-  service { ['foo-oneshot', 'foo-daemon']: }
+  service { ['foo-oneshot', 'foo-daemon']:
+    ensure => running,
+  }
 
   file { '/tmp/out':
     ensure  => file,
