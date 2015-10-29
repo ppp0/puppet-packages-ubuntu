@@ -1,0 +1,3 @@
+#!/bin/sh
+
+while true; do echo 'alive and kicking' >> /tmp/out-daemon; sleep 1; done
